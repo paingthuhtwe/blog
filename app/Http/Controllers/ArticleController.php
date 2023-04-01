@@ -8,7 +8,16 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        return "Article Controller Index";
+        $data = [
+            ["title" => "Article One"],
+            ["title" => "Article Two"],
+            ["title" => "Article Three"],
+            ["title" => "Article Four"],
+            ["title" => "Article Five"],
+        ];
+        return view('articles.index', [
+            "articles" => $data
+        ]);
     }
 
     public function detail($id)
