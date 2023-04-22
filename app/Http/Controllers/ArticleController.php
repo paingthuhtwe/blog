@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -35,11 +36,24 @@ class ArticleController extends Controller
 
     public function add()
     {
-        return view("articles.add");
+        $categories = Category::all();
+        return view("articles.add", [
+            'categories' => $categories
+        ]);
     }
 
     public function create()
     {
+        $validator = validator(request()->all(), [
+            'title' => 'required',
+            'body' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
         $article = new Article();
         $article->title = request()->title;
         $article->body = request()->body;

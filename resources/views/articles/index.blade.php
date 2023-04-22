@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
         <div class="container">
@@ -17,9 +17,16 @@
                         {{ $article->title }}
                     </h4>
                     <div class="text-muted small">
-                        <b>Category:
-                            {{ $article->category->name }}</b>
-                        {{ $article->created_at->diffForHumans() }}
+                        <div class="badge bg-secondary">
+                            <b>Category: </b>
+                            {{ $article->category->name }}
+                        </div>
+                        <div class="badge bg-secondary">
+                            <b>Comment: {{ count($article->comments) }}</b>
+                        </div>
+                        <div class="badge bg-secondary">
+                            {{ $article->created_at->diffForHumans() }}
+                        </div>
                     </div>
                     <div>
                         {{ $article->body }}

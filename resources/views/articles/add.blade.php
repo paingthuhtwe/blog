@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="container">
+
+        @if ($errors->any())
+            <div class="alert alert-warning">
+                @foreach ($errors->all() as $err)
+                    {{ $err }}
+                @endforeach
+            </div>
+        @endif
         <form method="post" style="width: 400px">
             @csrf
             <label>Title</label>
@@ -9,9 +17,10 @@
             <label>Body</label>
             <textarea name="body"class="form-control mb-2" placeholder="Body"></textarea>
             <label>Category</label>
-            <select name="category_id" class="form-control mb-2">
-                <option value="1">News</option>
-                <option value="2">Tech</option>
+            <select name="category_id" class="form-select mb-2">
+                $@foreach ($categories as $category)
+                    <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                @endforeach
             </select>
             <button class="btn btn-primary">Add Article</button>
         </form>

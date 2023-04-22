@@ -1,21 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+use function Pest\Laravel\get;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+test('/articles route', function () {
+    get('/articles')->assertOk();
+});
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-}
+test('article index view', function () {
+    get('/articles')
+        ->assertOk()
+        ->assertViewIs('articles.index')
+        ->assertViewHas('articles');
+});
