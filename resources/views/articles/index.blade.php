@@ -18,6 +18,9 @@
                                 {{ $article->title }}
                             </h3>
                             <div class="text-muted small">
+                                <div class="badge bg-success">
+                                    {{ $article->user->name }}
+                                </div>
                                 <div class="badge bg-danger">
                                     <b>Category: </b>
                                     {{ $article->category->name }}
