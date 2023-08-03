@@ -18,7 +18,7 @@ class CategoryApiController extends Controller
      */
     public function index()
     {
-        return Category::all();
+        return Category::all()->with('status', 'success');
     }
 
     /**
@@ -40,7 +40,7 @@ class CategoryApiController extends Controller
         $category->name = request()->name;
         $category->save();
 
-        return $category;
+        return $category->with('status', 'success');
     }
 
     /**
@@ -53,7 +53,7 @@ class CategoryApiController extends Controller
     {
         $category = Category::find($id);
 
-        return $category;
+        return $category->with('status', 'success');
     }
 
     /**
@@ -76,7 +76,7 @@ class CategoryApiController extends Controller
         $category->name = request()->name;
         $category->save();
 
-        return $category;
+        return $category->with('status', 'success');
     }
 
     /**
@@ -90,6 +90,6 @@ class CategoryApiController extends Controller
         $category = Category::find($id);
         $category->delete();
 
-        return $category;
+        return $category->with('status', 'success');
     }
 }

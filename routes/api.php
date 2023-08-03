@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoryApiController;
+use App\Http\Controllers\ArticleApiController;
 use App\Models\User;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -21,6 +22,7 @@ Route::post('/login', function () {
     }
 
     $user = User::where('email', request()->email)->first();
+
     if ($user) {
         if (password_verify(request()->password, $user->password)) {
             return $user->createToken('browser')->plainTextToken;
@@ -31,3 +33,5 @@ Route::post('/login', function () {
 });
 
 Route::apiResource('/categories', CategoryApiController::class);
+
+Route::apiResource('/articles', ArticleApiController::class);
